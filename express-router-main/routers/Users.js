@@ -26,11 +26,25 @@ router.route("/")
 .get((req,res)=>{
     res.json(users)
 })
+.post((req,res)=>{
+    users.push(req.body)
+    res.json(users)
+})
 
 router.route("/:id")
 .get((req,res)=>{
     let id = req.params.id-1
     res.json(users[id]);
+})
+.put((req,res)=>{
+    let id = req.params.id-1
+    users[id] = req.body
+    res.json(users[id])
+})
+.delete((req,res)=>{
+    let id = req.params.id-1
+    let removed = users.splice(id,1)
+    res.json("This was removed:" + removed)
 })
 
 

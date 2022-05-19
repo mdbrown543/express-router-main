@@ -26,6 +26,10 @@ router.route("/")
 .get((req,res)=>{
     res.json(fruits)
 })
+.post((req,res)=>{
+    fruits.push(req.body)
+    res.json(fruits)
+})
 
 
 router.route("/:id")
@@ -33,6 +37,17 @@ router.route("/:id")
     let id = req.params.id-1
     res.json(fruits[id]);
 })
+.put((req,res)=>{
+    let id = req.params.id-1
+    fruits[id] = req.body
+    res.json(fruits[id])
+})
+.delete((req,res)=>{
+    let id = req.params.id-1
+    let removed = fruits.splice(id,1)
+    res.json("This was removed:" + removed)
+})
+
 
  
 module.exports = router;
